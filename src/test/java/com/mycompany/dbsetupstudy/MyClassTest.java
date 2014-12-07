@@ -40,7 +40,8 @@ public class MyClassTest {
      @Before
     public void prepare() throws Exception {
              String createProc = "create or replace procedure abc_dbsetup as \nbegin delete from job; end abc_dbsetup;";
-    
+       String dropTable ="drop table dick";
+       String createTable ="create table dick (id  integer, age integer, naam varchar(20))";
         Operation operation =
             sequenceOf(
              Operations.deleteAllFrom("JOB"),
@@ -50,7 +51,9 @@ public class MyClassTest {
                     .values(1L, "AMA", "Amazon")
                     .values(2L, "PMI", "PriceMinister")
                         
-                    .build(), Operations.sql(createProc));
+                    .build(), Operations.sql(createProc), 
+                   Operations.sql(dropTable), 
+                    Operations.sql(createTable));
                     
           //  DbSetup dbSetup = new DbSetup(new DataSourceDestination(dataSource), operation);
             // or without DataSource:
